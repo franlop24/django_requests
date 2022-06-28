@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 import requests
@@ -23,3 +24,15 @@ def home(request, page=1):
                                                     'info': info,
                                                     'characters': characters
                                                     })
+
+def search(request):
+    text_search = request.POST['text_search']
+    
+    url = f"https://rickandmortyapi.com/api/character/?name={text_search}"
+
+    response = requests.request("GET", url).json()
+
+    characters = response['results']
+
+    return render(request, 'rickandmorty/search.html', {'characters': characters})
+    

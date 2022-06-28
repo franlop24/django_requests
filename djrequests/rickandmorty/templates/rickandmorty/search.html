@@ -1,0 +1,20 @@
+{% extends 'rickandmorty/base.html' %}
+
+{% block content %}
+<h2>Lista de personajes</h2>
+  
+<div class="row row-cols-2 row-cols-md-4 g-8">
+    {% for character in characters %}
+    <div class="col mb-2 text-dark">
+        <div class="card">
+            <img src="{{ character.image }}" class="card-img-top" alt="{{ character.image }}">
+            <div class="card-body">
+            <h5 class="card-title">{{ character.name }}</h5>
+            <p class="card-text">{{ character.status }} - {{ character.species }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
+    
