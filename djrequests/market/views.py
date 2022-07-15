@@ -23,4 +23,8 @@ def token(request):
     }
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    return render(request, 'market/token.html', {'response': response.text})
+    if response.status_code == 200:
+        return render(request, 'market/token.html', {'response': response.text})
+    else:
+        return render(request, 'market/token.html', {'response': "Error de Authentication"})
+

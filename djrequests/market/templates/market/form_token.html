@@ -7,12 +7,14 @@
     <title>Form para Creación de Token</title>
 </head>
 <body>
-    <h1>Formualrio para Token en Market</h1>
+    <h1>Formulario para Token en Market</h1>
     <form action="{% url 'token' %}" method="post">
         {% csrf_token %}
+        <label for="username">Username</label>
         <input type="text" name="username" id="username">
         <hr>
-        <input type="text" name="password" id="password">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
         <hr>
         <button type="submit">Crea Token</button>
     </form>
