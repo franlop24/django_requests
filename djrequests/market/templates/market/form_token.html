@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Formualrio para Token en Market</h1>
-    <form action="{% url 'token' %}">
+    <form action="{% url 'token' %}" method="post">
         {% csrf_token %}
         <input type="text" name="username" id="username">
         <hr>

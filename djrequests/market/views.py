@@ -1,3 +1,6 @@
+import requests
+import json
+
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -9,4 +12,15 @@ def form_token(request):
     return render(request, 'market/form_token.html')
 
 def token(request):
-    return render(request, 'market/token.html')
+    url = "https://franlopsmarket.herokuapp.com/franlops-market/api/auth/authenticate"
+
+    payload = json.dumps({
+    "username": request.POST['username'],
+    "password": request.POST['password']
+    })
+    headers = {
+    'Content-Type': 'application/json'
+    }
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    return render(request, 'market/token.html', {'response': response.text})
