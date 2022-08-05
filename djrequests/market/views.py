@@ -1,11 +1,15 @@
 import requests
 import json
+import os
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 # Create your views here.
-def index(request, token):
+def index(request):
+
+    token = os.environ.get('TOKEN')
+    print(token)
 
     url = "https://franlopsmarket.herokuapp.com/franlops-market/api/products/all"
 
@@ -36,7 +40,10 @@ def token(request):
     response = requests.request("POST", url, headers=headers, data=payload)
 
     if response.status_code == 200:
-        return render(request, 'market/token.html', {'response': response.text})
+        os.environ['TOKEN'] = response.json()['jwt']
+        print(os.environ.get('TOKEN'))
+        return redirect('/market/products/')
+        #render(request, 'market/token.html', {'response': response.text})
     else:
         return render(request, 'market/token.html', {'response': "Error de Authentication"})
 
