@@ -41,9 +41,7 @@ def token(request):
 
     if response.status_code == 200:
         os.environ['TOKEN'] = response.json()['jwt']
-        print(os.environ.get('TOKEN'))
         return redirect('/market/products/')
-        #render(request, 'market/token.html', {'response': response.text})
     else:
         return render(request, 'market/token.html', {'response': "Error de Authentication"})
 
