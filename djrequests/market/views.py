@@ -45,3 +45,18 @@ def token(request):
     else:
         return render(request, 'market/token.html', {'response': "Error de Authentication"})
 
+def product(request, productId):
+    url = f"https://franlopsmarket.herokuapp.com/franlops-market/api/products/{productId}"
+
+    payload={}
+
+    token = os.environ.get('TOKEN')
+    
+    headers = {
+    'Authorization': f'Bearer {token}'
+    }
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+    product = response.json()
+
+    return render(request, 'market/product.html', {'product': product})

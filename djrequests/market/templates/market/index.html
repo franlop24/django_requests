@@ -13,6 +13,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Producto</th>
                 <th>Botón</th>
             </tr>
@@ -20,6 +21,7 @@
         <tbody>
         {% for product in products %}
             <tr>
+                <td><a href="{% url 'product' product.productId %}">{{ product.productId }}</a></td>
                 <td>{{ product.name }}</td>
                 <td><a class="btn btn-primary" href="#">Eliminar</a></td>
             </tr>
