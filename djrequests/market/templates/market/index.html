@@ -23,7 +23,15 @@
             <tr>
                 <td><a href="{% url 'product' product.productId %}">{{ product.productId }}</a></td>
                 <td>{{ product.name }}</td>
-                <td><a class="btn btn-primary" href="#">Eliminar</a></td>
+                <td>
+                    <form action="{% url 'delete' product.productId %}">
+                        {% csrf_token %}
+                        <button type="submit" 
+                            class="btn btn-danger"
+                            onclick="return confirm('Estás seguro?')">
+                            Eliminar</button>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
