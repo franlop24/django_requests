@@ -9,7 +9,6 @@ from django.shortcuts import redirect, render
 def index(request):
 
     token = os.environ.get('TOKEN')
-    print(token)
 
     url = "https://franlopsmarket.herokuapp.com/franlops-market/api/products/all"
 
@@ -60,3 +59,16 @@ def product(request, productId):
     product = response.json()
 
     return render(request, 'market/product.html', {'product': product})
+
+def delete(request, productId):
+    url = f"https://franlopsmarket.herokuapp.com/franlops-market/api/products/delete/{productId}"
+
+    payload={}
+    token = os.environ.get('TOKEN')
+    headers = {
+    'Authorization': f'Bearer {token}'
+    }
+
+    response = requests.request("DELETE", url, headers=headers, data=payload)
+
+    return redirect('/market/products/')
