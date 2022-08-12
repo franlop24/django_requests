@@ -72,3 +72,6 @@ def delete(request, productId):
     response = requests.request("DELETE", url, headers=headers, data=payload)
 
     return redirect('/market/products/')
+
+def nuevo(request):
+    return render(request, 'market/nuevo.html')
